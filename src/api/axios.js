@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = 'http://emre09-001-site1.atempurl.com/api';
+const BASE_URL = 'https://akademiksohbetodasi.site/api';
 
 export default axios.create({
     baseURL: BASE_URL,
