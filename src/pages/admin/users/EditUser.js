@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate'
+import { Box, useTheme, Typography } from "@mui/material";
+import { tokens } from '../../../theme';
 
 const EditUser = () => {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
@@ -55,7 +59,7 @@ const EditUser = () => {
               <div class="mb-5">
                 <label
                   for="name"
-                  class="mb-3 block text-base font-medium text-[#07074D]"
+                  class="mb-3 block text-base font-medium"
                 >
                   Ad
                 </label>
@@ -74,7 +78,7 @@ const EditUser = () => {
               <div class="mb-5">
                 <label
                   for="surname"
-                  class="mb-3 block text-base font-medium text-[#07074D]"
+                  class="mb-3 block text-base font-medium"
                 >
                   Soyad
                 </label>
@@ -95,7 +99,7 @@ const EditUser = () => {
           <div class="mb-5">
             <label
               for="email"
-              class="mb-3 block text-base font-medium text-[#07074D]"
+              class="mb-3 block text-base font-medium"
             >
               Email
             </label>
@@ -113,7 +117,7 @@ const EditUser = () => {
           <div class="mb-5">
             <label
               for="username"
-              class="mb-3 block text-base font-medium text-[#07074D]"
+              class="mb-3 block text-base font-medium"
             >
               Username
             </label>
@@ -130,7 +134,7 @@ const EditUser = () => {
 
 
           <div class="mb-5">
-            <label class="mb-3 block text-base font-medium text-[#07074D]">
+            <label class="mb-3 block text-base font-medium">
               Role
             </label>
             <div class="flex items-center space-x-6">
@@ -146,7 +150,7 @@ const EditUser = () => {
                 />
                 <label
                   for="admin"
-                  class="pl-3 text-base font-medium text-[#07074D]"
+                  class="pl-3 text-base font-medium"
                 >
                   Admin
                 </label>
@@ -163,7 +167,7 @@ const EditUser = () => {
                 />
                 <label
                   for="ogrenci"
-                  class="pl-3 text-base font-medium text-[#07074D]"
+                  class="pl-3 text-base font-medium"
                 >
                   Öğrenci
                 </label>
@@ -180,7 +184,7 @@ const EditUser = () => {
                 />
                 <label
                   for="egitimci"
-                  class="pl-3 text-base font-medium text-[#07074D]"
+                  class="pl-3 text-base font-medium"
                 >
                   Eğitimci
                 </label>
@@ -198,7 +202,7 @@ const EditUser = () => {
             />
             <label
               for="status"
-              class="pl-3 text-base font-medium text-[#07074D]"
+              class="pl-3 text-base font-medium"
             >
               Durum
             </label>
@@ -206,11 +210,11 @@ const EditUser = () => {
           <div className='flex flex-col'>
             <button
               type='submit'
-              className="border border-green-700 bg-green-700 text-white rounded-md px-4 py-2 transition duration-500 ease select-none hover:bg-green-800 focus:outline-none focus:shadow-outlinehover:shadow-form text-center text-base font-semibold outline-none"
+              className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
               >
               Güncelle
             </button>
-            <button className='mt-4' onClick={() => navigate(-1)}>Geri Dön</button>
+            <button type='button' className='mt-4' onClick={() => navigate(-1)}>Geri Dön</button>
           </div>
         </form>
       </div>

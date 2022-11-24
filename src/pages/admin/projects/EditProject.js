@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate'
+import { Box, useTheme, Typography } from "@mui/material";
+import { tokens } from '../../../theme';
 
 const EditProject = () => {
   const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
 
     const { id } = useParams();
   const [projectName, setProjectName] = useState("");
@@ -42,7 +46,7 @@ const EditProject = () => {
                     <div className="mb-5">
                         <label
                             for="projectName"
-                            className="mb-3 block text-base font-medium text-[#07074D]"
+                            className="mb-3 block text-base font-medium"
                         >
                             Proje Adı
                         </label>
@@ -60,7 +64,7 @@ const EditProject = () => {
                     <div class="mb-5">
                         <label
                             for="projectDetails"
-                            className="mb-3 block text-base font-medium text-[#07074D]"
+                            className="mb-3 block text-base font-medium"
                         >
                             Proje Detay
                         </label>
@@ -77,11 +81,11 @@ const EditProject = () => {
                     <div className='flex flex-col'>
                         <button
                             type='submit'
-                            className="border border-green-700 bg-green-700 text-white rounded-md px-4 py-2 transition duration-500 ease select-none hover:bg-green-800 focus:outline-none focus:shadow-outlinehover:shadow-form text-center text-base font-semibold outline-none"
-                        >
+                            className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+                            >
                             Güncelle
                         </button>
-                        <button className='mt-4' onClick={() => navigate(-1)}>Geri Dön</button>
+                        <button type='button' className='mt-4' onClick={() => navigate(-1)}>Geri Dön</button>
 
                     </div>
                 </form>

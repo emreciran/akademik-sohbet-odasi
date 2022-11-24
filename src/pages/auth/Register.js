@@ -1,8 +1,12 @@
 import React, {useState} from 'react'
 import { Navigate } from 'react-router-dom';
 import axios from '../../api/axios';
+import { tokens } from '../../theme';
+import { Box, useTheme, Typography } from "@mui/material";
 
 const Register = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
@@ -48,7 +52,7 @@ const Register = () => {
 
      <div className="relative mt-1">
        <input
-         className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none"
+         className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none text-black"
          placeholder="Adınız"
          onChange={e => setName(e.target.value)}
        />
@@ -60,7 +64,7 @@ const Register = () => {
 
      <div className="relative mt-1">
        <input
-         className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none"
+         className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none text-black"
          placeholder="Soyadınız"
          onChange={e => setSurname(e.target.value)}
        />
@@ -72,7 +76,7 @@ const Register = () => {
 
      <div className="relative mt-1">
        <input
-         className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none"
+         className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none text-black"
          placeholder="Kullanıcı adınız"
          onChange={e => setUserName(e.target.value)}
        />
@@ -86,7 +90,7 @@ const Register = () => {
      <div className="relative mt-1">
        <input
          type="email"
-         className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none"
+         className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none text-black"
          placeholder="Email hesabınızı giriniz"
          onChange={e => setEmail(e.target.value)}
        />
@@ -100,7 +104,7 @@ const Register = () => {
      <div className="relative mt-1">
        <input
          type="password"
-         className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none"
+         className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none text-black"
          placeholder="Şifrenizi giriniz"
          onChange={e => setPassword(e.target.value)}
        />
@@ -136,7 +140,7 @@ const Register = () => {
      <div className="relative mt-1">
        <input
          type="password"
-         className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none"
+         className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none text-black"
          placeholder="Şifrenizi tekrar giriniz"
          onChange={e => setConfirmPassword(e.target.value)}
        />

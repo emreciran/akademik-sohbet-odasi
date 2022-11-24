@@ -21,7 +21,7 @@ function App() {
           <div className="app">
             {user !== false && user !== undefined ? <Sidebar /> : ''}
             <main className="content">
-              <Topbar />
+              {user !== false && user !== undefined ? <Topbar /> : ''}
               {showRoutes}
             </main>
           </div>

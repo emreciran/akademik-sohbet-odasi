@@ -3,11 +3,15 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "../../api/axios";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/auth";
+import { Box, useTheme, Typography } from "@mui/material";
+import { tokens } from "../../theme";
 
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -52,7 +56,7 @@ const Login = () => {
           <input
             type="email"
             id="email"
-            className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none"
+            className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none text-black"
             placeholder="Email hesabınızı giriniz"
             onChange={e => setEmail(e.target.value)}
           />
@@ -67,7 +71,7 @@ const Login = () => {
           <input
             type="password"
             id="password"
-            className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none"
+            className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none text-black"
             placeholder="Şifrenizi giriniz"
             onChange={e => setPassword(e.target.value)}
           />
