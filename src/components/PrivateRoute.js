@@ -6,7 +6,7 @@ const PrivateRoute = ({ children, allowedRoles }) => {
     const {user} = useSelector(state => state.auth);
     const location = useLocation();
     if(!user){
-        return <Navigate to="/auth/giris" replace={true} state={{
+        return <Navigate to="/auth/login" replace={true} state={{
             return_url: location.pathname
         }} />
     }
@@ -14,7 +14,7 @@ const PrivateRoute = ({ children, allowedRoles }) => {
     user?.role?.find(r => allowedRoles?.includes(r))
         ? children
         : !user
-            ? <Navigate to="/auth/giris" replace={true} state={{
+            ? <Navigate to="/auth/login" replace={true} state={{
                 return_url: location.pathname
             }} />
             : <Navigate to={user.role.includes("Admin") ? "/admin" : "/"} replace={true} state={{

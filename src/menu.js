@@ -7,13 +7,9 @@ import PeopleIcon from '@mui/icons-material/People';
 import EventIcon from '@mui/icons-material/Event';
 import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
 import LogoutOutlined from '@mui/icons-material/LogoutOutlined';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { tokens } from './theme';
 import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
-import { axiosPrivate } from './api/axios';
-import { useDispatch } from "react-redux";
-import { login, setUser } from './store/auth';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -36,23 +32,8 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const MenuLinks = () => {
   const location = useLocation();
   const { user } = useSelector(state => state.auth);
-  const navigate = useNavigate();
   const [selected, setSelected] = useState(location.pathname);
-  const dispatch = useDispatch();
   let menu;
-
-  const Logout = async (e) => {
-    e.preventDefault()
-    await axiosPrivate.post("/auth/logout", "", {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true
-    })
-
-    dispatch(login())
-    dispatch(setUser())
-
-    navigate("/auth/giris")
-  }
 
   menu = (
     <>
@@ -85,16 +66,6 @@ const MenuLinks = () => {
           selected={selected}
           setSelected={setSelected}
         />
-        <button
-          onClick={Logout}
-        >
-          <Item
-            title="Çıkış Yap"
-            icon={<LogoutOutlined />}
-            selected={selected}
-            setSelected={setSelected}
-          />
-        </button>
 
       </> : ''}
 
@@ -113,29 +84,16 @@ const MenuLinks = () => {
           selected={selected}
           setSelected={setSelected}
         />
-        <button
-          onClick={Logout}
-        >
-          <Item
-            title="Çıkış Yap"
-            icon={<LogoutOutlined />}
-            selected={selected}
-            setSelected={setSelected}
-          />
-        </button>
       </> : ''}
 
       {user?.role.includes("Ogrenci") ? <>
-        <button
-          onClick={Logout}
-        >
-          <Item
-            title="Çıkış Yap"
-            icon={<LogoutOutlined />}
+        <Item
+            title="AnaSayfa"
+            to="/"
+            icon={<HomeOutlinedIcon />}
             selected={selected}
             setSelected={setSelected}
           />
-        </button>
       </> : ''}
     </>
   )

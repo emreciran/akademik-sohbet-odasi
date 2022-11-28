@@ -65,9 +65,9 @@ const CategoriesTable = ({ categories, DeleteCategory }) => {
 
 return (
 <Box m="20px">
-      <Box display='flex' justifyContent='space-between' alignItems='center'>
+      <Box display='flex' flexDirection='column' >
         <Header title="Kategoriler" />
-        <Link to='/admin/categories/add' className="hover:bg-[#544ede] rounded-md bg-[#6A64F1] py-2 px-8 text-center text-base font-semibold text-white outline-none">Ekle</Link>
+        <Link to='/admin/categories/add' className="w-32 mt-2 hover:bg-[#544ede] rounded-md bg-[#6A64F1] py-2 px-8 text-center text-base font-semibold text-white outline-none">Ekle</Link>
       </Box>
       <Box
         m="40px 0 0 0"

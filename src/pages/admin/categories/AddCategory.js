@@ -85,7 +85,7 @@ const AddCategory = () => {
                                         >
                                             Ekle
                                         </button>
-                                        <button className='mt-4' onClick={() => navigate(-1)}>Geri Dön</button>
+                                        <button type='button' className='mt-4' onClick={() => navigate(-1)}>Geri Dön</button>
                                     </Box>
                                 </form>
                             )

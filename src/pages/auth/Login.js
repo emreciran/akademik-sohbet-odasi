@@ -32,15 +32,15 @@ const Login = () => {
         dispatch(login(response.data))
 
         if (response.data.role.includes("Admin")){
-          navigate(location.state?.return_url || '/admin', {
+          navigate('/admin', {
             replace: true
           })
         } else { 
-          navigate(location.state?.return_url || '/', {
+          navigate('/', {
             replace: true
           })
         }
-        
+        console.log(location.state);
     }
 
   return (
@@ -110,7 +110,7 @@ const Login = () => {
 
       <p className="text-center text-sm text-gray-500">
         Hesabın mı yok?
-        <a className="underline" href="/auth/kayit">Üye ol</a>
+        <a className="underline" href="/auth/register">Üye ol</a>
       </p>
     </form>
     </div>

@@ -12,14 +12,15 @@ const Sidebar = () => {
     const { userDetails } = useSelector(state => state.auth)
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const [isCollapsed, setIsCollapsed] = useState(false);
+    const [isCollapsed, setIsCollapsed] = useState(true);
     const styles = {
       sideBarHeight: {
-        height: "100vh"
+        height: "100%",
       },
     };
   return (
     <Box
+    height="100%"
     sx={{
       "& .pro-sidebar-inner": {
         background: `${colors.primary[400]} !important`,

@@ -12,6 +12,8 @@ import EditCategory from "./pages/admin/categories/EditCategory";
 import AddCategory from "./pages/admin/categories/AddCategory";
 import Projects from "./pages/admin/projects";
 import EditProject from "./pages/admin/projects/EditProject";
+import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
 
 const ROLES = {
     1: 'Admin',
@@ -27,11 +29,25 @@ const routes = [
         allowedRoles: [ROLES[2], ROLES[3]]
     },
     {
+        path: '/profile',
+        element: <Profile />,
+        auth: true,
+        allowedRoles: [ROLES[1], ROLES[2], ROLES[3]]
+    },
+    {
+        path: '/settings',
+        element: <Settings />,
+        auth: true,
+        allowedRoles: [ROLES[1], ROLES[2], ROLES[3]]
+    },
+
+    // ============= AUTH ROUTES START ==================
+    {
         path: '/auth',
         element: <AuthLayout />,
         children: [
             {
-                path: 'giris',
+                path: 'login',
                 element: <Login />
             }
         ]
@@ -41,11 +57,14 @@ const routes = [
         element: <AuthLayout />,
         children: [
             {
-                path: 'kayit',
+                path: 'register',
                 element: <Register />
             }
         ]
     },
+    // ============= AUTH ROUTES END ==================
+
+    // ============= ADMIN ROUTES START ==================
     {
         path: '/admin',
         element: <AdminLayout />,
@@ -130,12 +149,18 @@ const routes = [
             }
         ]
     },
+    // ============= ADMIN ROUTES END ==================
+
+    // ============= EGITIMCI ROUTES START ==================
+
     {
         path: '/egitimci',
         element: <Egitimci />,
         auth: true,
         allowedRoles: [ROLES[3]]
     }
+    // ============= EGITIMCI ROUTES END ==================
+
 ]
 
 const authCheck = routes => routes.map(route => {

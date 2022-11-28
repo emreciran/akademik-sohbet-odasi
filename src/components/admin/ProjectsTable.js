@@ -18,6 +18,11 @@ const ProjectsTable = ({ projects, DeleteProject }) => {
         flex: 1,
       },
       {
+        field: "project_Details",
+        headerName: "Proje Detayı",
+        flex: 1,
+      },
+      {
         field: "actions",
         type: "actions",
         getActions: (params) => [
