@@ -8,13 +8,13 @@ body,
 .app,
 .content {
   height: 100%;
-  width: 100%;
   font-family: "Nunito", sans-serif;
 }
 
 .content{
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
 
 .app {

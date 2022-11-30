@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { tokens } from '../../../theme';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate'
 import { Formik } from 'formik';
-import * as yup from "yup";
+import { CategorySchema } from '../../validations';
+import ErrorMessage from '../../../components/ErrorMessage';
 
 const AddCategory = () => {
     const axiosPrivate = useAxiosPrivate();
@@ -22,10 +23,6 @@ const AddCategory = () => {
         navigate("/admin/categories")
       };
 
-    const categorySchema = yup.object().shape({
-        category_Name: yup.string().required("Kategori adı boş bırakılamaz!")
-    })
-
 
     return (
         <Box>
@@ -35,7 +32,7 @@ const AddCategory = () => {
                     <Formik
                         onSubmit={handleFormSubmit}
                         initialValues={initialValues}
-                        validationSchema={categorySchema}
+                        validationSchema={CategorySchema}
                     >
                         {
                             ({ values, errors, handleSubmit, touched, handleChange, dirty, isSubmitting }) => (
@@ -58,7 +55,7 @@ const AddCategory = () => {
                                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                                         />
                                         {errors.category_Name && touched.category_Name && (
-                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{errors.category_Name}</p>
+                                            <ErrorMessage error={errors.category_Name} />
                                         )}
                                     </Box>
                                     <Box class="mb-5">

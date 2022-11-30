@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from '../../theme';
 import Avatar from 'react-avatar';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
@@ -19,7 +19,7 @@ const Sidebar = () => {
       },
     };
   return (
-    <Box
+    <Box className='max-md:z-20 max-md:fixed top-0 lg:left-0 peer-focus:left-0 peer:transition ease-out delay-150 duration-200'
     height="100%"
     sx={{
       "& .pro-sidebar-inner": {
@@ -41,7 +41,6 @@ const Sidebar = () => {
   >
     <ProSidebar style={styles.sideBarHeight} collapsed={isCollapsed}>
       <Menu iconShape="square">
-        {/* LOGO AND MENU ICON */}
         <MenuItem
           onClick={() => setIsCollapsed(!isCollapsed)}
           icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
@@ -94,6 +93,7 @@ const Sidebar = () => {
       </Menu>
     </ProSidebar>
   </Box>
+
   )
 }
 

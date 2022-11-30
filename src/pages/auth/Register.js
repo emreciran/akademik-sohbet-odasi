@@ -22,22 +22,13 @@ const Register = () => {
 
 
   const initialValues = {
-    name: "",
-    surname: "",
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: ""
-  }
-
-  const data = {
     name,
     surname,
     username,
     email,
     password,
-    confirmPassword,
-  };
+    confirmPassword
+  }
 
   const handleFormSubmit = async (values) => {
 
@@ -73,7 +64,8 @@ const Register = () => {
                     <input
                       className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none text-black"
                       placeholder="Adınız"
-                      onChange={e => setName(e.target.value)}
+                      id='name'
+                      onChange={handleChange}
                     />
                     {errors.name && touched.name && (
                       <ErrorMessage error={errors.name} />
@@ -87,7 +79,8 @@ const Register = () => {
                     <input
                       className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none text-black"
                       placeholder="Soyadınız"
-                      onChange={e => setSurname(e.target.value)}
+                      id='surname'
+                      onChange={handleChange}
                     />
                     {errors.surname && touched.surname && (
                       <ErrorMessage error={errors.surname} />
@@ -101,7 +94,8 @@ const Register = () => {
                     <input
                       className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none text-black"
                       placeholder="Kullanıcı adınız"
-                      onChange={e => setUserName(e.target.value)}
+                      id='username'
+                      onChange={handleChange}
                     />
                     {errors.username && touched.username && (
                       <ErrorMessage error={errors.username} />
@@ -115,9 +109,10 @@ const Register = () => {
                   <div className="relative mt-1">
                     <input
                       type="email"
+                      id='email'
                       className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none text-black"
                       placeholder="Email hesabınızı giriniz"
-                      onChange={e => setEmail(e.target.value)}
+                      onChange={handleChange}
                     />
                     {errors.email && touched.email && (
                       <ErrorMessage error={errors.email} />
@@ -133,7 +128,8 @@ const Register = () => {
                       type="password"
                       className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none text-black"
                       placeholder="Şifrenizi giriniz"
-                      onChange={e => setPassword(e.target.value)}
+                      id='password'
+                      onChange={handleChange}
                     />
                     {errors.password && touched.password && (
                       <ErrorMessage error={errors.password} />
@@ -171,7 +167,8 @@ const Register = () => {
                       type="password"
                       className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm outline-none text-black"
                       placeholder="Şifrenizi tekrar giriniz"
-                      onChange={e => setConfirmPassword(e.target.value)}
+                      id='confirmPassword'
+                      onChange={handleChange}
                     />
                     {errors.confirmPassword && touched.confirmPassword && (
                       <ErrorMessage error={errors.confirmPassword} />
@@ -203,6 +200,7 @@ const Register = () => {
 
                 <button
                   type="submit"
+                  disabled={!dirty || isSubmitting}
                   className="block w-full rounded-lg bg-blue-600 px-5 py-3 text-sm font-medium text-white"
                 >
                   Üye Ol
