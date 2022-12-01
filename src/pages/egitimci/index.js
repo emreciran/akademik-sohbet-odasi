@@ -17,7 +17,7 @@ const Egitimci = () => {
   }, [])
 
   return (
-    <div>Egitimci</div>
+    <div className='max-md:pl-20'>Egitimci</div>
   )
 }
 

@@ -43,3 +43,7 @@ button[disabled]{
   background-color: #8786b5;
   color: #ccc;
 }
+.markdown{
+    overflow: auto;
+    border-radius: 10px;
+}

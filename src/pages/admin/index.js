@@ -18,7 +18,9 @@ const AdminLayout = () => {
   }, [])
 
   return (
+    <div className='max-md:pl-20'>
       <Outlet />
+    </div>
   )
 }
 

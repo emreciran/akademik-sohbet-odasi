@@ -1,12 +1,11 @@
-import { Box, Typography, useTheme, Tab, Tabs } from '@mui/material'
 import React, {useEffect, useState} from 'react'
-import Avatar from 'react-avatar';
-import { tokens } from '../theme';
-import useAxiosPrivate from '../hooks/useAxiosPrivate';
-import { setUser } from '../store/auth';
-import { useDispatch, useSelector } from 'react-redux';
-import ProfileProjectList from '../components/ogrenci/ProfileProjectList';
-import Header from '../components/Header';
+import { useParams } from 'react-router-dom'
+import useAxiosPrivate from '../hooks/useAxiosPrivate'
+import { Box, Typography, useTheme, Tab, Tabs } from '@mui/material'
+import Header from '../components/Header'
+import ProfileProjectList from '../components/ogrenci/ProfileProjectList'
+import { tokens } from '../theme'
+import Avatar from 'react-avatar'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -28,12 +27,6 @@ function TabPanel(props) {
   );
 }
 
-// TabPanel.propTypes = {
-//   children: PropTypes.node,
-//   index: PropTypes.number.isRequired,
-//   value: PropTypes.number.isRequired,
-// };
-
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -41,28 +34,32 @@ function a11yProps(index) {
   };
 }
 
-const Profile = () => {
-    const { userDetails } = useSelector(state => state.auth)
+
+const ProfileByUsername = () => {
+    const params = useParams();
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    const username = params.username;
     const axiosPrivate = useAxiosPrivate();
-    const dispatch = useDispatch();
+
     const [value, setValue] = useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-    const getData = async () => {
-      const userDetails = await axiosPrivate.get('/user/getuser')
-      dispatch(setUser(userDetails.data))
-    }
+    const handleChange = (event, newValue) => {
+      setValue(newValue);
+    };
 
-    useEffect(() => {
+    const [userDetails, setUserDetails] = useState()
+    const getData = async () => {
+        const user = await axiosPrivate.get(`/user/user/${username}`)
+        setUserDetails(user.data)
+    } 
+
+      useEffect(() => {
         getData()
       }, [])
   return (
     <Box m='20px' className='max-md:pl-20'>
-           <Header title='Profilim' />
+           <Header title='Kullanıcı Detay' />
     <Box display='flex' flexDirection='column' alignItems='center'>
         
         <Box display='flex' flexDirection='column' alignItems='center'>
@@ -99,9 +96,9 @@ const Profile = () => {
         </Box>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs textColor="secondary" indicatorColor="secondary" value={value} onChange={handleChange} aria-label="secondary tabs example">
-          <Tab label="Bilgilerim" {...a11yProps(0)} />
-          <Tab label="Projelerim" {...a11yProps(1)} />
-          <Tab label="Sorularım" {...a11yProps(2)} />
+          <Tab label="Kullanıcı Bilgileri" {...a11yProps(0)} />
+          {userDetails?.role !== "Admin" ? <Tab label="Sorular" {...a11yProps(1)} /> : ""}
+          {userDetails?.role === "Ogrenci" ? <Tab label="Projeler" {...a11yProps(2)} /> : ""}
         </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
@@ -125,17 +122,17 @@ const Profile = () => {
                 <Typography variant='h5' marginLeft={1}>{userDetails?.username}</Typography>
             </Box>
         </Box>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        {userDetails?.role === "Ogrenci" ? <ProfileProjectList /> : ""}
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Sorularım
-      </TabPanel>
-        
+        </TabPanel>
+        {userDetails?.role !== "Admin" ? <TabPanel value={value} index={1}>
+          Sorular
+      </TabPanel> : ""}
+        {userDetails?.role === "Ogrenci" ? <TabPanel value={value} index={2}>
+          {userDetails?.role === "Ogrenci" ? <ProfileProjectList /> : ""}
+        </TabPanel> : ""}
+       
     </Box>
     </Box>
   )
 }
 
-export default Profile
+export default ProfileByUsername

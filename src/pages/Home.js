@@ -19,7 +19,7 @@ const Home = () => {
 
   const {userDetails} = useSelector(state => state.auth)
   return (
-    <div>
+    <div className='max-md:pl-20'>
       Welcome home, {userDetails?.name + " " + userDetails?.surname}
       <br />
       Your role: {userDetails?.role}

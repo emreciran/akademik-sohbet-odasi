@@ -22,7 +22,7 @@ function App() {
         <CssBaseline />
           <div className="app">
             {user !== false && user !== undefined ? <Sidebar /> : ''}
-            <main className="content max-md:pl-20">
+            <main className="content">
               {user !== false && user !== undefined ? <Topbar /> : ''}
               {showRoutes}
             </main>

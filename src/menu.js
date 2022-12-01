@@ -6,7 +6,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleIcon from '@mui/icons-material/People';
 import EventIcon from '@mui/icons-material/Event';
 import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
-import LogoutOutlined from '@mui/icons-material/LogoutOutlined';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { tokens } from './theme';
 import { useSelector } from 'react-redux';
@@ -84,6 +84,13 @@ const MenuLinks = () => {
           selected={selected}
           setSelected={setSelected}
         />
+        <Item
+            title="Soru Cevap"
+            to="/soru-cevap"
+            icon={<QuestionAnswerIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
       </> : ''}
 
       {user?.role.includes("Ogrenci") ? <>
@@ -91,6 +98,13 @@ const MenuLinks = () => {
             title="AnaSayfa"
             to="/"
             icon={<HomeOutlinedIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <Item
+            title="Soru Cevap"
+            to="/soru-cevap"
+            icon={<QuestionAnswerIcon />}
             selected={selected}
             setSelected={setSelected}
           />

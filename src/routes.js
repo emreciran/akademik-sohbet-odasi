@@ -14,6 +14,10 @@ import Projects from "./pages/admin/projects";
 import EditProject from "./pages/admin/projects/EditProject";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
+import SoruCevap from "./pages/soru-cevap";
+import ProfileByUsername from "./pages/ProfileByUsername";
+import SoruSor from "./pages/soru-sor";
+import SoruDetay from "./pages/soru-detay";
 
 const ROLES = {
     1: 'Admin',
@@ -29,6 +33,24 @@ const routes = [
         allowedRoles: [ROLES[2], ROLES[3]]
     },
     {
+        path: '/soru-cevap',
+        element: <SoruCevap />,
+        auth: true,
+        allowedRoles: [ROLES[2], ROLES[3]]
+    },
+    {
+        path: '/soru-sor',
+        element: <SoruSor />,
+        auth: true,
+        allowedRoles: [ROLES[2], ROLES[3]]
+    },
+    {
+        path: '/soru/:id/:title',
+        element: <SoruDetay />,
+        auth: true,
+        allowedRoles: [ROLES[2], ROLES[3]]
+    },
+    {
         path: '/profile',
         element: <Profile />,
         auth: true,
@@ -37,6 +59,12 @@ const routes = [
     {
         path: '/settings',
         element: <Settings />,
+        auth: true,
+        allowedRoles: [ROLES[1], ROLES[2], ROLES[3]]
+    },
+    {
+        path: '/:username',
+        element: <ProfileByUsername />,
         auth: true,
         allowedRoles: [ROLES[1], ROLES[2], ROLES[3]]
     },

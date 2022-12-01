@@ -19,8 +19,10 @@ import { useDispatch } from "react-redux";
 import { login, setUser } from '../../store/auth';
 import { axiosPrivate } from '../../api/axios';
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 const Topbar = () => {
+    const { userDetails } = useSelector(state => state.auth); 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const colorMode = useContext(ColorModeContext);
@@ -59,12 +61,15 @@ const Topbar = () => {
                         <DarkModeOutlinedIcon />
                     )}
                 </IconButton>
+
+                    
                 <IconButton
                     onClick={handleClick}
                     aria-controls={open ? 'account-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                 >
+                    <Typography>{`${userDetails?.name} ${userDetails?.surname}`}</Typography>
                     <PersonOutlinedIcon />
                 </IconButton>
 
