@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { tokens } from '../../../theme';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate'
 import { Formik } from 'formik';
-import { CategorySchema } from '../../validations';
+import { CategorySchema } from '../../../validations';
 import ErrorMessage from '../../../components/ErrorMessage';
 
 const AddCategory = () => {

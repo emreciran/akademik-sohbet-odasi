@@ -6,6 +6,7 @@ import Header from '../components/Header'
 import ProfileProjectList from '../components/ogrenci/ProfileProjectList'
 import { tokens } from '../theme'
 import Avatar from 'react-avatar'
+import ProfileQuestionList from '../components/ogrenci/ProfileQuestionList'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -124,7 +125,7 @@ const ProfileByUsername = () => {
         </Box>
         </TabPanel>
         {userDetails?.role !== "Admin" ? <TabPanel value={value} index={1}>
-          Sorular
+          {userDetails?.role !== "Admin" ? <ProfileQuestionList user={userDetails} /> : ""}
       </TabPanel> : ""}
         {userDetails?.role === "Ogrenci" ? <TabPanel value={value} index={2}>
           {userDetails?.role === "Ogrenci" ? <ProfileProjectList /> : ""}

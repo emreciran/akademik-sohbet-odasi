@@ -6,7 +6,7 @@ import { login } from "../../store/auth";
 import { Box, useTheme, Typography } from "@mui/material";
 import { tokens } from "../../theme";
 import { Formik } from 'formik';
-import { LoginSchema } from "../validations";
+import { LoginSchema } from "../../validations";
 import ErrorMessage from '../../components/ErrorMessage';
 import { toast } from 'react-toastify';
 

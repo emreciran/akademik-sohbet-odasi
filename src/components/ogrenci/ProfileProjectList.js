@@ -1,5 +1,7 @@
+import { Card, Typography } from '@mui/material';
 import React, {useState, useEffect} from 'react'
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import Header from '../Header';
 
@@ -19,12 +21,14 @@ const ProfileProjectList = () => {
 
   return (
     <div>
-        <Header title='Projelerim' />
+        <Header title='Projeler' />
         {projects?.map((project) => (
-            <>
-                <h3>Proje Adı: {project.project_Name}</h3>
-                <p>Proje Detayı: {project.project_Details}</p>
-            </>
+            <Link to={`/proje/${project.project_ID}/${project.project_Name.toLowerCase().replace(/[^\w-]+/g, '-')}`} key={project.project_ID}>
+                <Card sx={{ minWidth: 275, backgroundColor: 'transparent' }} className="pt-4 pb-4 pl-8 pr-8 mb-2 text-center" display='flex' flexDirection='column'>
+                    <Typography variant='h3' marginBottom='1rem'>Proje Adı: {project.project_Name}</Typography>
+                    <Typography>Proje Detayı: {project.project_Details}</Typography>
+                </Card>
+            </Link>
         ))}
     </div>
   )

@@ -7,6 +7,7 @@ import { setUser } from '../store/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileProjectList from '../components/ogrenci/ProfileProjectList';
 import Header from '../components/Header';
+import ProfileQuestionList from '../components/ogrenci/ProfileQuestionList';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -28,11 +29,6 @@ function TabPanel(props) {
   );
 }
 
-// TabPanel.propTypes = {
-//   children: PropTypes.node,
-//   index: PropTypes.number.isRequired,
-//   value: PropTypes.number.isRequired,
-// };
 
 function a11yProps(index) {
   return {
@@ -100,8 +96,8 @@ const Profile = () => {
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs textColor="secondary" indicatorColor="secondary" value={value} onChange={handleChange} aria-label="secondary tabs example">
           <Tab label="Bilgilerim" {...a11yProps(0)} />
-          <Tab label="Projelerim" {...a11yProps(1)} />
-          <Tab label="Sorularım" {...a11yProps(2)} />
+          {userDetails?.role !== "Admin" ? <Tab label="Sorular" {...a11yProps(1)} /> : ""}
+          {userDetails?.role === "Ogrenci" ? <Tab label="Projeler" {...a11yProps(2)} /> : ""}
         </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
@@ -126,12 +122,12 @@ const Profile = () => {
             </Box>
         </Box>
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        {userDetails?.role === "Ogrenci" ? <ProfileProjectList /> : ""}
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Sorularım
-      </TabPanel>
+      {userDetails?.role !== "Admin" ? <TabPanel value={value} index={1}>
+        {userDetails?.role !== "Admin" ? <ProfileQuestionList /> : ""}
+      </TabPanel> : ""}
+      {userDetails?.role === "Ogrenci" ? <TabPanel value={value} index={2}>
+          {userDetails?.role === "Ogrenci" ? <ProfileProjectList /> : ""}
+        </TabPanel> : ""}
         
     </Box>
     </Box>

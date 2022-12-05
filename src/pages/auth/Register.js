@@ -4,7 +4,7 @@ import axios from '../../api/axios';
 import { tokens } from '../../theme';
 import { Box, useTheme, Typography } from "@mui/material";
 import { Formik } from 'formik';
-import { RegisterSchema } from '../validations';
+import { RegisterSchema } from '../../validations';
 import ErrorMessage from '../../components/ErrorMessage';
 
 const Register = () => {
