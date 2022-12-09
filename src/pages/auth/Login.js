@@ -50,6 +50,11 @@ const notify = (error) => {
         navigate('/admin', {
           replace: true
         })
+      } 
+      if (response.data.role.includes("Egitimci")){
+        navigate('/egitimci', {
+          replace: true
+        })
       } else {
         navigate('/', {
           replace: true

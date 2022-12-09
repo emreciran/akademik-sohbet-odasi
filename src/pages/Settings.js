@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { tokens } from '../theme';
-import { Box, Typography, useTheme } from '@mui/material'
+import { Box, Typography, useTheme, Skeleton } from '@mui/material'
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import { setUser } from '../store/auth';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,12 +22,15 @@ const Settings = () => {
   const [newPassword, setNewPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
 
+  const [loading, setLoading] = useState(true)
+
   const getData = async () => {
     const user = await axiosPrivate.get('/user/getuser')
     setName(user.data.name)
     setSurname(user.data.surname)
     setEmail(user.data.email)
     setUsername(user.data.username)
+    setLoading(false)
   }
 
   const data = {
@@ -42,7 +45,7 @@ const Settings = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const updatedUser = await axiosPrivate.post(`/user/UpdateUserProfile`, data);
+    await axiosPrivate.post(`/user/UpdateUserProfile`, data);
     navigate("/profile")
   }
 
@@ -65,15 +68,19 @@ const Settings = () => {
                     >
                       Ad
                     </label>
-                    <input
+                    {
+                      loading ? (
+                        <Skeleton variant="rounded" animation="wave" width='100%' height={53} />
+                      ) : <input
                       type="text"
                       name="Name"
                       id="name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Ad"
-                      class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                      class="w-full rounded-md border border-[#a8a4f7] transition-all bg-transparent py-3 px-6 text-base font-medium outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
+                    }
                   </div>
                 </div>
                 <div class="w-full px-3 sm:w-1/2">
@@ -84,15 +91,20 @@ const Settings = () => {
                     >
                       Soyad
                     </label>
-                    <input
+                    {
+                      loading ? (
+                        <Skeleton variant="rounded" animation="wave" width='100%' height={53} />
+                      ): <input
                       type="text"
                       name="Surname"
                       id="surname"
                       value={surname}
                       onChange={(e) => setSurname(e.target.value)}
                       placeholder="Soyad"
-                      class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                      class="w-full rounded-md border border-[#a8a4f7] transition-all bg-transparent py-3 px-6 text-base font-medium outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
+                    }
+                    
                   </div>
                 </div>
 
@@ -106,15 +118,19 @@ const Settings = () => {
                     >
                       Email
                     </label>
-                    <input
+                    {
+                      loading ? (
+                        <Skeleton variant="rounded" animation="wave" width='100%' height={53} />
+                      ) : <input
                       type="text"
                       name="Email"
                       id="email"
                       disabled
                       value={email}
                       placeholder="Email"
-                      class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                      class="w-full rounded-md border border-[#a8a4f7] transition-all bg-transparent py-3 px-6 text-base font-medium outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
+                    }
                   </div>
                 </div>
                 <div class="w-full px-3 sm:w-1/2">
@@ -125,15 +141,19 @@ const Settings = () => {
                     >
                       Username
                     </label>
-                    <input
+                    {
+                      loading ? (
+                        <Skeleton variant="rounded" animation="wave" width='100%' height={53} />
+                      ) : <input
                       type="text"
                       name="Username"
                       id="username"
                       disabled
                       value={username}
                       placeholder="Username"
-                      class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                      class="w-full rounded-md border border-[#a8a4f7] transition-all bg-transparent py-3 px-6 text-base font-medium outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
+                    }
                   </div>
                 </div>
               </div>
@@ -144,14 +164,18 @@ const Settings = () => {
                 >
                   Yeni Şifre
                 </label>
-                <input
+                {
+                  loading ? (
+                    <Skeleton variant="rounded" animation="wave" width='100%' height={53} />
+                  ) : <input
                   type="password"
                   name="Email"
                   id="newpassword"
                   onChange={(e) => setNewPassword(e.target.value)}
                   placeholder="Yeni Şifre"
-                  class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  class="w-full rounded-md border border-[#a8a4f7] transition-all bg-transparent py-3 px-6 text-base font-medium outline-none focus:border-[#6A64F1] focus:shadow-md"
                 />
+                }
               </div>
               <div class="mb-5">
                 <label
@@ -160,14 +184,18 @@ const Settings = () => {
                 >
                   Yeni Şifre Tekrar
                 </label>
-                <input
+                {
+                  loading ? (
+                    <Skeleton variant="rounded" animation="wave" width='100%' height={53} />
+                  ) : <input
                   type="password"
                   name="Email"
                   id="confirmpassword"
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Yeni Şifre Tekrar"
-                  class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  class="w-full rounded-md border border-[#a8a4f7] transition-all bg-transparent py-3 px-6 text-base font-medium outline-none focus:border-[#6A64F1] focus:shadow-md"
                 />
+                }
               </div>
               <div className='flex flex-col'>
                 <button

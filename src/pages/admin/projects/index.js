@@ -3,7 +3,7 @@ import useAxiosPrivate from '../../../hooks/useAxiosPrivate'
 import Swal from 'sweetalert2'
 import ProjectsTable from '../../../components/admin/ProjectsTable';
 
-const Projects = () => {
+const AdminProjects = () => {
     const axiosPrivate = useAxiosPrivate();
     const [projects, setProjects] = useState()
   
@@ -60,4 +60,4 @@ const Projects = () => {
   )
 }
 
-export default Projects
+export default AdminProjects

@@ -1,6 +1,6 @@
 import React from 'react'
 import QuestionItem from './QuestionItem'
-import { Box, Typography, Grid, useTheme } from '@mui/material'
+import { Grid  } from '@mui/material'
 
 const QuestionList = ({ questions }) => {
   return (

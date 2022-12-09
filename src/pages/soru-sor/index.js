@@ -9,21 +9,7 @@ import {atomOneDarkReasonable} from 'react-syntax-highlighter/dist/esm/styles/hl
 import { MultiSelect } from "react-multi-select-component";
 import { useSelector } from 'react-redux';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
-
-const options = [
-  { label: "JavaScript", value: 10 },
-  { label: "CSS", value: 11 },
-  { label: "HTML", value: 12 },
-  { label: "C#", value: 13 },
-  { label: "Python", value: 14 },
-  { label: "C++", value: 15 },
-  { label: "Unity", value: 16 },
-  { label: "ReactJS", value: 17 },
-  { label: ".Net Core", value: 18 },
-  { label: "MSSQL", value: 19 },
-  { label: "MYSQL", value: 20 },
-  { label: "Firebase", value: 21 },
-]
+import {TagOptions} from '../../data/Tags';
 
 const SoruSor = () => {
   const { userDetails } = useSelector(state => state.auth); 
@@ -76,7 +62,7 @@ const SoruSor = () => {
                   onChange={(e) => setTitle(e.target.value)}
                   id="title"
                   placeholder="Soru başlığı giriniz.."
-                  class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  class="w-full rounded-md border transition-all border-[#a8a4f7] bg-transparent py-3 px-6 text-base font-medium outline-none focus:border-[#6A64F1] focus:shadow-md"
                 />
               </div>
               <div className='mb-5'>
@@ -93,7 +79,7 @@ const SoruSor = () => {
                  value={content}
                  rows={10}
                  onChange={(e) => setContent(e.target.value)}
-                 class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                 class="w-full rounded-md border transition-all border-[#a8a4f7] bg-transparent py-3 px-6 text-base font-medium outline-none focus:border-[#6A64F1] focus:shadow-md" />
                  <ReactMarkdown children={content}  components={{
                   code({node, inline, className, children, ...props}) {
                     const match = /language-(\w+)/.exec(className || '')
@@ -121,7 +107,7 @@ const SoruSor = () => {
                   Tag seçiniz
                 </label>
                 <MultiSelect
-                options={options}
+                options={TagOptions}
                 value={tags}
                 onChange={setTags}
                 labelledBy="Tag seçiniz"

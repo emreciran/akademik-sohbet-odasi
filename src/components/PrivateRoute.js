@@ -17,7 +17,7 @@ const PrivateRoute = ({ children, allowedRoles }) => {
             ? <Navigate to="/auth/login" replace={true} state={{
                 return_url: location.pathname
             }} />
-            : <Navigate to={user.role.includes("Admin") ? "/admin" : "/"} replace={true} state={{
+            : <Navigate to={user.role.includes("Admin") ? "/admin" : user.role.includes("Egitimci") ? "/egitimci" : "/"} replace={true} state={{
                 return_url: location.pathname
             }} />
   )

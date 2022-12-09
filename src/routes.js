@@ -10,7 +10,7 @@ import EditUser from "./pages/admin/users/EditUser";
 import Categories from "./pages/admin/categories";
 import EditCategory from "./pages/admin/categories/EditCategory";
 import AddCategory from "./pages/admin/categories/AddCategory";
-import Projects from "./pages/admin/projects";
+import AdminProjects from "./pages/admin/projects";
 import EditProject from "./pages/admin/projects/EditProject";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
@@ -18,6 +18,13 @@ import SoruCevap from "./pages/soru-cevap";
 import ProfileByUsername from "./pages/ProfileByUsername";
 import SoruSor from "./pages/soru-sor";
 import SoruDetay from "./pages/soru-detay";
+import Projects from "./pages/projects";
+import ProjectDetails from "./pages/project-details";
+import NewProject from "./pages/new-projects";
+import CategoriesList from "./pages/categories.js";
+import CategoryDetails from "./pages/categories.js/CategoryDetails";
+import TagsList from "./pages/tags";
+import TagDetails from "./pages/tags/TagDetails";
 
 const ROLES = {
     1: 'Admin',
@@ -30,7 +37,7 @@ const routes = [
         path: '/',
         element: <Home />,
         auth: true,
-        allowedRoles: [ROLES[2], ROLES[3]]
+        allowedRoles: [ROLES[2]]
     },
     {
         path: '/soru-cevap',
@@ -47,6 +54,48 @@ const routes = [
     {
         path: '/soru/:id/:title',
         element: <SoruDetay />,
+        auth: true,
+        allowedRoles: [ROLES[2], ROLES[3]]
+    },
+    {
+        path: '/projects',
+        element: <Projects />,
+        auth: true,
+        allowedRoles: [ROLES[2], ROLES[3]]
+    },
+    {
+        path: '/projects/:id/:title',
+        element: <ProjectDetails />,
+        auth: true,
+        allowedRoles: [ROLES[2], ROLES[3]]
+    },
+    {
+        path: '/yeni-proje',
+        element: <NewProject />,
+        auth: true,
+        allowedRoles: [ROLES[2], ROLES[3]]
+    },
+    {
+        path: '/categories',
+        element: <CategoriesList />,
+        auth: true,
+        allowedRoles: [ROLES[2], ROLES[3]]
+    },
+    {
+        path: '/categories/:name',
+        element: <CategoryDetails />,
+        auth: true,
+        allowedRoles: [ROLES[2], ROLES[3]]
+    },
+    {
+        path: '/tags',
+        element: <TagsList />,
+        auth: true,
+        allowedRoles: [ROLES[2], ROLES[3]]
+    },
+    {
+        path: '/tags/:name',
+        element: <TagDetails />,
         auth: true,
         allowedRoles: [ROLES[2], ROLES[3]]
     },
@@ -161,7 +210,7 @@ const routes = [
         children: [
             {
                 path: 'projects',
-                element: <Projects />
+                element: <AdminProjects />
             }
         ]
     },

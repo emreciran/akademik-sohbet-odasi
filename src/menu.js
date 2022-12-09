@@ -7,6 +7,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import EventIcon from '@mui/icons-material/Event';
 import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import TagIcon from '@mui/icons-material/Tag';
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { tokens } from './theme';
 import { useSelector } from 'react-redux';
@@ -71,13 +72,6 @@ const MenuLinks = () => {
 
       {user?.role.includes("Egitimci") ? <>
         <Item
-          title="AnaSayfa"
-          to="/"
-          icon={<HomeOutlinedIcon />}
-          selected={selected}
-          setSelected={setSelected}
-        />
-        <Item
           title="Eğitimci Paneli"
           to="/egitimci"
           icon={<HomeOutlinedIcon />}
@@ -91,6 +85,27 @@ const MenuLinks = () => {
             selected={selected}
             setSelected={setSelected}
           />
+        <Item
+          title="Taglar"
+          to="/tags"
+          icon={<TagIcon />}
+          selected={selected}
+          setSelected={setSelected}
+        />
+        <Item 
+            title="Projeler"
+            to="/projects"
+            icon={<EventIcon />}
+            selected={selected}
+            setSelected={setSelected}
+        />
+        <Item
+          title="Kategoriler"
+          to="/categories"
+          icon={<CalendarViewMonthIcon />}
+          selected={selected}
+          setSelected={setSelected}
+        />
       </> : ''}
 
       {user?.role.includes("Ogrenci") ? <>
@@ -108,6 +123,27 @@ const MenuLinks = () => {
             selected={selected}
             setSelected={setSelected}
           />
+          <Item
+          title="Taglar"
+          to="/tags"
+          icon={<TagIcon />}
+          selected={selected}
+          setSelected={setSelected}
+        />
+          <Item 
+            title="Projeler"
+            to="/projects"
+            icon={<EventIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <Item
+          title="Kategoriler"
+          to="/categories"
+          icon={<CalendarViewMonthIcon />}
+          selected={selected}
+          setSelected={setSelected}
+        />
       </> : ''}
     </>
   )
