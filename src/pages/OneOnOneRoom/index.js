@@ -49,7 +49,7 @@ const OneOnOneRoom = () => {
             roomName,
             roomType: "1-on-1",
             invitedUsers: selectedUser,
-            roomCreateDate: startDate,
+            roomStartDate: startDate,
             maxUsers: 1,
             status: true,
           });

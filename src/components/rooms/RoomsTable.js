@@ -34,7 +34,7 @@ const RoomsTable = ({ rooms, openEditRoom, myRooms }) => {
           headerName: "Oda Linki",
           renderCell: ({ row }) => {
             if(row.status){
-              if(row.roomCreateDate === moment().format("l")){
+              if(row.roomStartDate === moment().format("l")){
                 return (
                   <CopyToClipboard text={`${process.env.REACT_APP_URL}/join/${row.roomId}`} onCopy={() => notify("Kopyalandı!")}>
                       <GridActionsCellItem
@@ -74,7 +74,7 @@ const RoomsTable = ({ rooms, openEditRoom, myRooms }) => {
           flex: 1
         },
         {
-          field: "roomCreateDate",
+          field: "roomStartDate",
           headerName: "Başlama Zamanı",
           flex: 1
         },
@@ -83,7 +83,7 @@ const RoomsTable = ({ rooms, openEditRoom, myRooms }) => {
           headerName: "Durumu",
           renderCell: ({ row }) => {
               if(row.status){
-                if(row.roomCreateDate === moment().format("l")){
+                if(row.roomStartDate === moment().format("l")){
                   return (
                     <Link to={`/join/${row.roomId}`}>
                           <Box
@@ -102,7 +102,7 @@ const RoomsTable = ({ rooms, openEditRoom, myRooms }) => {
                   </Box>
                     </Link>
                   )
-                } else if(moment(row.roomCreateDate).isBefore(moment().format("l"))){
+                } else if(moment(row.roomStartDate).isBefore(moment().format("l"))){
                   return(
                     <Box
                     width="100%"
@@ -119,7 +119,7 @@ const RoomsTable = ({ rooms, openEditRoom, myRooms }) => {
                     </Typography>
                   </Box>
                   )
-                } else if(moment(row.roomCreateDate).isAfter(moment().format("l"))){
+                } else if(moment(row.roomStartDate).isAfter(moment().format("l"))){
                   return(
                     <Box
                     width="100%"
@@ -164,7 +164,7 @@ const RoomsTable = ({ rooms, openEditRoom, myRooms }) => {
               <GridActionsCellItem 
               disabled={
                 !params.row.status ||
-                moment(params.row.roomCreateDate).isBefore(moment().format("l"))
+                moment(params.row.roomStartDate).isBefore(moment().format("l"))
               }
               icon={<EditIcon />}
               label="Güncelle"

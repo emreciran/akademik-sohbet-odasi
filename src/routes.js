@@ -31,6 +31,7 @@ import OneOnOneRoom from "./pages/OneOnOneRoom";
 import GroupVideoRoom from "./pages/GroupVideoRoom";
 import MyRooms from "./pages/MyRooms";
 import Rooms from "./pages/rooms";
+import JoinRoom from "./pages/JoinRoom";
 
 const ROLES = {
     1: 'Admin',
@@ -79,6 +80,12 @@ const routes = [
     {
         path: '/rooms',
         element: <Rooms />,
+        auth: true,
+        allowedRoles: [ROLES[2], ROLES[3]]
+    },
+    {
+        path: '/join/:id',
+        element: <JoinRoom />,
         auth: true,
         allowedRoles: [ROLES[2], ROLES[3]]
     },

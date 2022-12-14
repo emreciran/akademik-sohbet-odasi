@@ -13,6 +13,7 @@ import CreateRoomButtons from '../FormComponents/CreateRoomButtons';
 import { doc, updateDoc } from "firebase/firestore";
 import { firebaseDB } from '../../utils/firebaseConfig';
 import { toast } from 'react-toastify';
+import { MultiSelect } from 'react-multi-select-component';
 
 const EditRoom = ({ room, close }) => {
     const [state, setState] = useState({ right: false });
@@ -21,7 +22,7 @@ const EditRoom = ({ room, close }) => {
     const [roomName, setRoomName] = useState(room.roomName);
     const [roomType] = useState(room.roomType);
     const [selectedUser, setSelectedUser] = useState([]);
-    const [startDate, setStartDate] = useState(moment(room.roomCreateDate));
+    const [startDate, setStartDate] = useState(moment(room.roomStartDate));
     const [size, setSize] = useState(room.maxUsers);
     const [status, setStatus] = useState(room.status);
 
@@ -40,13 +41,24 @@ const EditRoom = ({ room, close }) => {
 
     useEffect(() => {
         if (users) {
-            const foundUsers = []
-            room.invitedUsers?.forEach((user) => {
-                const findUser = users.find(tempUser => tempUser.uid === user)
-                if (findUser) foundUsers.push(findUser)
-            })
-            setSelectedUser(foundUsers)
-        }
+            
+            if(roomType === "1-on-1"){
+                setSelectedUser(room.invitedUsers)
+            } else{
+                const foundUsers = []
+                for(const user of room.invitedUsers){
+                    const findUser = users.find(tempUser => tempUser.value === user) 
+                        if (findUser) foundUsers.push({
+                            label: findUser.label,
+                            value: findUser.value
+                        })
+                    }
+                    setSelectedUser(foundUsers)
+                }
+                
+        }    
+
+        
     }, [users, room])
 
     const toggleDrawer = (anchor, open) => (event) => {
@@ -57,13 +69,14 @@ const EditRoom = ({ room, close }) => {
 
     const handleEditRoom = async (e) => {
         e.preventDefault()
+        const usersData = roomType === "1-on-1" ? selectedUser : selectedUser.map((user) => user.value)
         const editedRoom = {
             ...room,
             roomName,
             roomType,
-            invitedUsers: selectedUser.map((user) => user.uid),
+            invitedUsers: usersData,
             maxUsers: size,
-            roomCreateDate: startDate.format("l"),
+            roomStartDate: startDate.format("l"),
             status
         }
 
@@ -101,13 +114,25 @@ const EditRoom = ({ room, close }) => {
                             <ListItem>
                                 {roomType === "anyone-can-join-room" ? (
                                     <RoomMaximumUsersField label="Odaya Katılabilecek Maksimum Kişi Sayısı" value={size} setSize={setSize} />
-                                ) : (
+                                ) : roomType === "1-on-1" ? (
                                     <RoomUserField
                                         label="Kişi Seçiniz"
                                         options={users}
                                         value={selectedUser}
                                         onChange={(e) => setSelectedUser(e.target.value)}
                                     />
+                                ) : (
+                                    <Box display="flex" flexDirection="column" width="100%">
+                                    <label className="mb-3 block text-base font-medium">
+                                        Davet Et
+                                    </label>
+                                    <MultiSelect
+                                    options={users}
+                                    value={selectedUser}
+                                    onChange={setSelectedUser}
+                                    labelledBy="Kullanıcı Seçiniz"
+                                    />
+                                    </Box>
                                 )}
                             </ListItem>
                             <ListItem>

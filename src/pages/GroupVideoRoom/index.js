@@ -54,7 +54,7 @@ const GroupVideoRoom = () => {
             roomName,
             roomType: anyoneCanJoin ? "anyone-can-join-room" : "invited-users-can-join-room",
             invitedUsers: anyoneCanJoin ? [] : selectedUser.map((user) => user.value),
-            roomCreateDate: startDate,
+            roomStartDate: startDate,
             maxUsers: anyoneCanJoin ? size : selectedUser.length,
             status: true,
           });

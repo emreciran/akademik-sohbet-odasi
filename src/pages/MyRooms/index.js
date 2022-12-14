@@ -51,9 +51,9 @@ const MyRooms = () => {
   return (
     <Box m='20px' className='max-md:pl-20'>
         <Header title="Odalarım" />
-        <RoomsTable rooms={rooms} openEditRoom={openEditRoom} />
+        <RoomsTable rooms={rooms} openEditRoom={openEditRoom} myRooms />
         {showEditRoom && (
-            <EditRoom room={editRoom.row} close={closeEditRoom} myRooms />
+            <EditRoom room={editRoom.row} close={closeEditRoom} />
         )}
     </Box>
   )
