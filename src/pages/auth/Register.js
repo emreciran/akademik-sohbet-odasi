@@ -6,10 +6,26 @@ import { Box, useTheme, Typography } from "@mui/material";
 import { Formik } from 'formik';
 import { RegisterSchema } from '../../validations';
 import ErrorMessage from '../../components/ErrorMessage';
+import { firebaseDB, register as firebaseRegister, usersRef } from '../../utils/firebaseConfig';
+import { toast } from 'react-toastify';
+import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 
 const Register = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const notify = (error) => {
+    toast.error(error, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  }
 
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
@@ -32,11 +48,27 @@ const Register = () => {
 
   const handleFormSubmit = async (values) => {
 
-    await axios.post('auth/register', values, {
-      headers: { 'Content-Type': 'application/json' }
-    })
+    try {
+      await axios.post('auth/register', values, {
+        headers: { 'Content-Type': 'application/json' }
+      })
+  
+      const user = await firebaseRegister(values.email, values.password)
 
-    setRedirect(true)
+      await addDoc(usersRef, {
+          uid: user.uid,
+          firstName: values.name,
+          surname: values.surname,
+          username: values.username,
+          email: user.email
+      })
+
+      setRedirect(true)
+    }catch (err){
+      if(err){
+        notify(err.response.data.message)
+      }
+    }
   }
 
   if (redirect) {

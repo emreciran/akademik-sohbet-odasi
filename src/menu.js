@@ -8,6 +8,7 @@ import EventIcon from '@mui/icons-material/Event';
 import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import TagIcon from '@mui/icons-material/Tag';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { tokens } from './theme';
 import { useSelector } from 'react-redux';
@@ -79,6 +80,13 @@ const MenuLinks = () => {
           setSelected={setSelected}
         />
         <Item
+          title="Dashboard"
+          to="/dashboard"
+          icon={<DashboardIcon />}
+          selected={selected}
+          setSelected={setSelected}
+        />
+        <Item
             title="Soru Cevap"
             to="/soru-cevap"
             icon={<QuestionAnswerIcon />}
@@ -113,6 +121,13 @@ const MenuLinks = () => {
             title="AnaSayfa"
             to="/"
             icon={<HomeOutlinedIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <Item
+            title="Dashboard"
+            to="/dashboard"
+            icon={<DashboardIcon />}
             selected={selected}
             setSelected={setSelected}
           />

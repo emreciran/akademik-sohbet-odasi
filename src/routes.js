@@ -25,6 +25,12 @@ import CategoriesList from "./pages/categories.js";
 import CategoryDetails from "./pages/categories.js/CategoryDetails";
 import TagsList from "./pages/tags";
 import TagDetails from "./pages/tags/TagDetails";
+import Dashboard from "./pages/dashboard";
+import CreateRoom from "./pages/create-room";
+import OneOnOneRoom from "./pages/OneOnOneRoom";
+import GroupVideoRoom from "./pages/GroupVideoRoom";
+import MyRooms from "./pages/MyRooms";
+import Rooms from "./pages/rooms";
 
 const ROLES = {
     1: 'Admin',
@@ -39,6 +45,44 @@ const routes = [
         auth: true,
         allowedRoles: [ROLES[2]]
     },
+    // ============= VIDEO CHAT ROUTES START ==================
+    {
+        path: '/dashboard',
+        element: <Dashboard />,
+        auth: true,
+        allowedRoles: [ROLES[2], ROLES[3]]
+    },
+    {
+        path: '/create',
+        element: <CreateRoom />,
+        auth: true,
+        allowedRoles: [ROLES[2], ROLES[3]]
+    },
+    {
+        path: '/create-1on1-room',
+        element: <OneOnOneRoom />,
+        auth: true,
+        allowedRoles: [ROLES[2], ROLES[3]]
+    },
+    {
+        path: '/create-group-room',
+        element: <GroupVideoRoom />,
+        auth: true,
+        allowedRoles: [ROLES[3]]
+    },
+    {
+        path: '/myrooms',
+        element: <MyRooms />,
+        auth: true,
+        allowedRoles: [ROLES[2], ROLES[3]]
+    },
+    {
+        path: '/rooms',
+        element: <Rooms />,
+        auth: true,
+        allowedRoles: [ROLES[2], ROLES[3]]
+    },
+    // ============= SORU-CEVAP ROUTES START ==================
     {
         path: '/soru-cevap',
         element: <SoruCevap />,
@@ -57,6 +101,9 @@ const routes = [
         auth: true,
         allowedRoles: [ROLES[2], ROLES[3]]
     },
+    // ============= SORU-CEVAP ROUTES END ==================
+
+    // ============= PROJECT ROUTES START ==================
     {
         path: '/projects',
         element: <Projects />,
@@ -75,6 +122,9 @@ const routes = [
         auth: true,
         allowedRoles: [ROLES[2], ROLES[3]]
     },
+    // ============= PROJECTS ROUTES END ==================
+
+    // ============= CATEGORIES ROUTES START ==================
     {
         path: '/categories',
         element: <CategoriesList />,
@@ -87,6 +137,9 @@ const routes = [
         auth: true,
         allowedRoles: [ROLES[2], ROLES[3]]
     },
+    // ============= CATEGORIES ROUTES END ==================
+
+    // ============= TAGS ROUTES START ==================
     {
         path: '/tags',
         element: <TagsList />,
@@ -99,6 +152,8 @@ const routes = [
         auth: true,
         allowedRoles: [ROLES[2], ROLES[3]]
     },
+    // ============= TAGS ROUTES END ==================
+
     {
         path: '/profile',
         element: <Profile />,

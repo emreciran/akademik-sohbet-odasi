@@ -16,7 +16,7 @@ export const RegisterSchema = Yup.object().shape({
 
     password: Yup.string()
                  .required("Şifre alanı zorunludur!")
-                 .min(5, 'Şifreniz en az 5 karakterden oluşmalıdır!')
+                 .min(6, 'Şifreniz en az 6 karakterden oluşmalıdır!')
                  .max(50, 'Şifreniz en fazla 50 karakterden oluşmalıdır!')
                  .matches(/[0-9]/, 'Şifrenizde en az 1 sayı olmalıdır!')
                  .matches(/[a-z]/, 'Şifrenizde en az 1 küçük harf olmalıdır!')

@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "../../api/axios";
 import { useDispatch } from "react-redux";
-import { login } from "../../store/auth";
+import { login, setFirebaseUser } from "../../store/auth";
 import { Box, useTheme, Typography } from "@mui/material";
 import { tokens } from "../../theme";
 import { Formik } from 'formik';
 import { LoginSchema } from "../../validations";
 import ErrorMessage from '../../components/ErrorMessage';
 import { toast } from 'react-toastify';
+import { login as firebaseLogin } from '../../utils/firebaseConfig';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const Login = () => {
   }
 const notify = (error) => {
   toast.error(error, {
-    position: "bottom-center",
+    position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -44,7 +45,10 @@ const notify = (error) => {
         withCredentials: true
       })
 
+      const user = await firebaseLogin(values.email, values.password)
+
       dispatch(login(response.data))
+      dispatch(setFirebaseUser({uid: user.uid, email: user.email, username: user.displayName}))
 
       if (response.data.role.includes("Admin")) {
         navigate('/admin', {

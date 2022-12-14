@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const  initialState = {
     user: JSON.parse(localStorage.getItem("token")) || false,
+    firebaseUserInfo: JSON.parse(localStorage.getItem("firebase")) || false,
     userDetails: JSON.parse(localStorage.getItem("user")) || false,
 }
 
@@ -26,9 +27,18 @@ const auth = createSlice({
             }
 
             state.userDetails = action.payload
+        },
+        setFirebaseUser: (state, action) => {
+            if(action.payload){
+                localStorage.setItem("firebase", JSON.stringify(action.payload))
+            } else{
+                localStorage.removeItem("firebase")
+            }
+
+            state.firebaseUserInfo = action.payload
         }
     }
 })
 
-export const {login, setUser} = auth.actions
+export const {login, setUser, setFirebaseUser} = auth.actions
 export default auth.reducer

@@ -107,7 +107,6 @@ const NewProject = () => {
               value={categories}
               onChange={setCategories}
               labelledBy="Kategori seçiniz"
-              className='text-black'
               />
             </div>
             <div className='flex flex-col'>

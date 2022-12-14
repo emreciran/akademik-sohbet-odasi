@@ -16,10 +16,11 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import Avatar from '@mui/material/Avatar';
 import { useDispatch } from "react-redux";
-import { login, setUser } from '../../store/auth';
+import { login, setUser, setFirebaseUser } from '../../store/auth';
 import { axiosPrivate } from '../../api/axios';
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
+import { logout } from '../../utils/firebaseConfig';
 
 const Topbar = () => {
     const { userDetails } = useSelector(state => state.auth); 
@@ -44,9 +45,11 @@ const Topbar = () => {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true
         })
-
+        await logout()
+        
         dispatch(login())
         dispatch(setUser())
+        dispatch(setFirebaseUser())
 
         navigate("/auth/login")
     }

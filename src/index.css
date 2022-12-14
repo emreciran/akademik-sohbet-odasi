@@ -38,12 +38,32 @@ body,
     background: #666;
 }
 
+input:disabled,
+input[disabled]{
+  background-color: #8180b3 !important;
+  color: #ccc !important;
+}
+
 button:disabled,
 button[disabled]{
-  background-color: #8786b5;
-  color: #ccc;
+  background-color: #8786b5 !important;
+  color: #ccc !important;
 }
 .markdown{
     overflow: auto;
     border-radius: 10px;
+}
+.dropdown-container{
+    background-color: transparent !important;
+    border-color: #a8a4f7 !important;
+    z-index: 10000 !important;
+}
+.dropdown-container:active{
+    border-color: #6A64F1 !important;
+}
+.dropdown-container:focus{
+    border-color: #6A64F1 !important;
+}
+.dropdown-content{
+    color: #111 !important;
 }

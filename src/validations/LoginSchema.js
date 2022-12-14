@@ -7,5 +7,5 @@ export const LoginSchema = Yup.object().shape({
 
     password: Yup.string()
                  .required("Şifre alanı zorunludur!")
-                 .min(5, "Şifreniz en az 5 karakter olmalıdır!"),
+                 .min(6, "Şifreniz en az 6 karakter olmalıdır!"),
 })

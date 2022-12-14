@@ -219,6 +219,8 @@ const ProjectDetails = () => {
         
         {
           show && (
+            <>
+            <Typography variant="h3" marginTop="20px">Düzenle</Typography>
             <Box className='mt-5' display='flex' flexDirection='column'>
               <textarea
                 type="text" 
@@ -253,6 +255,7 @@ const ProjectDetails = () => {
                 Düzenle
               </button>
             </Box>
+            </>
           )
         }
       </Box>

@@ -111,7 +111,6 @@ const SoruSor = () => {
                 value={tags}
                 onChange={setTags}
                 labelledBy="Tag seçiniz"
-                className='text-black'
                 />
               </div>
               <div className='flex flex-col'>
