@@ -90,7 +90,7 @@ const EditRoom = ({ room, close }) => {
 
     const list = (anchor) => (
         <Box
-            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 450 }}
+            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 350 }}
             role="presentation"
             width="100%"
         >  

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { ColorModeContext, useMode } from './theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import { useRoutes } from "react-router-dom";
+import { useLocation, useRoutes } from "react-router-dom";
 import routes from './routes';
 import Topbar from './components/global/Topbar';
 import Sidebar from './components/global/Sidebar';
@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [theme, colorMode] = useMode();
+  const location = useLocation()
   const {user} = useSelector(state => state.auth);
 
   const showRoutes = useRoutes(routes)
@@ -21,9 +22,10 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
           <div className="app">
-            {user !== false && user !== undefined ? <Sidebar /> : ''}
+            {location.pathname.includes("/join/") ? "" : user !== false && user !== undefined ? <Sidebar /> : ''}
+            
             <main className="content">
-              {user !== false && user !== undefined ? <Topbar /> : ''}
+              {location.pathname.includes("/join/") ? "" : user !== false && user !== undefined ? <Topbar /> : ''}
               {showRoutes}
             </main>
           </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { onAuthStateChanged } from "firebase/auth"
 import { firebaseAuth, roomsRef } from "../../utils/firebaseConfig"
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { getDocs, query, where } from 'firebase/firestore'
 import moment from 'moment'
@@ -16,7 +16,6 @@ const JoinRoom = () => {
   const params = useParams()
   const navigate = useNavigate()
   const [isAllowed, setIsAllowed] = useState(false)
-  const [userLoaded, setUserLoaded] = useState(false)
 
   const notify = (msg, type) => {
     toast.TYPE[`${type}`](msg, {
@@ -29,18 +28,6 @@ const JoinRoom = () => {
       progress: undefined,
       theme: "colored",
     });
-}
-const infoNotify = (msg) => {
-  toast.info(msg, {
-    position: "bottom-left",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "colored",
-  });
 }
 
 
@@ -87,6 +74,11 @@ const infoNotify = (msg) => {
     }
   }
 
+  const QuitRoom = () => {
+    navigate("/rooms")
+    window.location.reload();
+  }
+
   useEffect(() => {
     getRoomData()
   }, [])
@@ -100,10 +92,15 @@ const infoNotify = (msg) => {
       userDetails?.username ? userDetails.username : generateRoomID()
     );
     const zp = ZegoUIKitPrebuilt.create(kitToken);
-
+    
     zp?.joinRoom({
       container: element,
       maxUsers: 50,
+      preJoinViewConfig: {
+        title: <button onClick={QuitRoom}>Çıkış Yap</button>,
+      },
+      onLeaveRoom: QuitRoom,
+      showPinButton: false,
       sharedLinks: [
         {
           name: "Oda link",
