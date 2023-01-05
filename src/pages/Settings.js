@@ -6,6 +6,7 @@ import { setUser } from '../store/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
+import { getAuth, updatePassword } from 'firebase/auth';
 
 const Settings = () => {
   const { userDetails } = useSelector(state => state.auth);
@@ -23,6 +24,7 @@ const Settings = () => {
   const [confirmPassword, setConfirmPassword] = useState(null);
 
   const [loading, setLoading] = useState(true)
+  const auth = getAuth();
 
   const getData = async () => {
     const user = await axiosPrivate.get('/user/getuser')
@@ -46,7 +48,13 @@ const Settings = () => {
     e.preventDefault();
 
     await axiosPrivate.post(`/user/UpdateUserProfile`, data);
-    navigate("/profile")
+
+    updatePassword(auth.currentUser, newPassword).then(() => {
+      navigate("/profile")
+    }).catch(error => {
+      console.log(error);
+    })
+    
   }
 
   useEffect(() => {
